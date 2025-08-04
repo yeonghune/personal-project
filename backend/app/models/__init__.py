@@ -3,6 +3,7 @@ from sqlmodel import SQLModel
 from .auth_models import NewPassword, Token, TokenPayload
 from .common_models import Message
 from .item_models import Item, ItemBase, ItemCreate, ItemPublic, ItemsPublic, ItemUpdate
+from .todo_models import Todo, TodoBase, TodoCreate, TodoPublic, TodosPublic, TodoUpdate
 from .user_models import (
     UpdatePassword,
     User,
@@ -27,6 +28,13 @@ __all__ = [
     "UserUpdateMe",
     "UpdatePassword",
     "UsersPublic",
+    # Todo models
+    "Todo",
+    "TodoBase",
+    "TodoCreate",
+    "TodoUpdate",
+    "TodoPublic",
+    "TodosPublic",
     # Item models
     "Item",
     "ItemBase",
