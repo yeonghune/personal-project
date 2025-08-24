@@ -51,6 +51,7 @@ def send_email(
         smtp_options["user"] = settings.SMTP_USER
     if settings.SMTP_PASSWORD:
         smtp_options["password"] = settings.SMTP_PASSWORD
+    print(smtp_options)
     response = message.send(to=email_to, smtp=smtp_options)
     logger.info(f"send email result: {response}")
 
@@ -98,6 +99,18 @@ def generate_new_account_email(
         },
     )
     return EmailData(html_content=html_content, subject=subject)
+
+
+def generate_todo_due_email(*, email_to: str, title: str, description: str | None, due_time_utc: datetime) -> EmailData:
+    subject = f"[Todo Reminder] {title}"
+    safe_desc = description or "(no description)"
+    html = (
+        f"<h3>Todo Reminder</h3>"
+        f"<p><b>Title:</b> {title}</p>"
+        f"<p><b>Description:</b> {safe_desc}</p>"
+        f"<p><b>Due (UTC):</b> {due_time_utc.strftime('%Y-%m-%d %H:%M:%S')}</p>"
+    )
+    return EmailData(html_content=html, subject=subject)
 
 
 def generate_password_reset_token(email: str) -> str:
